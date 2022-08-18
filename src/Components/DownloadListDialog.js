@@ -145,7 +145,7 @@ const DownloadDialog = ({
                 className={classes.selecInputLabel}
                 id="demo-simple-select-label1"
               >
-                Selecciona una paraescolar
+                Selecciona un grupo
               </InputLabel>
               <Select
                 labelId="demo-simple-select-label1"
