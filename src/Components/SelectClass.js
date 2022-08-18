@@ -150,7 +150,7 @@ const SelectClass = () => {
       ): null}
       {selectedSucced ? (
         <>
-          <h2 className={classes.succedText}>{`El alumno ${selectStudent.nombre_completo} a sido inscrito en la paraescolar de ${selectStudent.paraescolar} con éxito.`}</h2>
+          <h2 className={classes.succedText}>{`El alumno ${selectStudent.nombre_completo} ha sido inscrito en la paraescolar de ${selectStudent.paraescolar} con éxito.`}</h2>
         </>
       ) : (
       <>
