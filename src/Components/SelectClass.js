@@ -23,6 +23,7 @@ const SelectClass = () => {
   const {
     selectParaescolares,
     selectStudent,
+    doStudentFetch,
     doParaescolaresFetch,
     doClearRequestError,
     doSetRequestError,
@@ -91,6 +92,7 @@ const SelectClass = () => {
       setOption3('')
       await doParaescolaresFetch()
     } else {
+      await doStudentFetch()
       setSelectedSucced(true)
       doSetRequestError(null)
     }
