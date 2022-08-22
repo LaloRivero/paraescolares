@@ -1,24 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { makeStyles } from "@material-ui/core/styles"
-import { Field, Form, Formik } from "formik"
-import { logo } from '../utils/constants'
 import DataTable from "react-data-table-component"
-import * as yup from 'yup'
 import AppContext from '../Lib/AppContext'
 
 
 import {
   Card,
   CardContent,
-  CircularProgress,
   InputLabel,
   FormControl,
   FormLabel,
   FormControlLabel,
   Radio,
   RadioGroup,
-  Typography,
-  TextField,
   Select,
   MenuItem
 } from "@material-ui/core"
@@ -86,7 +80,6 @@ const ClassesList = ({
   const [claseTurno, setClaseTurno] = useState('')
   const [selectedOption, setSelectedOption] = useState('paraescolar')
   const [tableData, setTableData] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
   const handleSelectClass = event => setClase(event.target.value)
   const handleSelectClassTurno = event => setClaseTurno(event.target.value)
   const handleChangeOption = event => {
@@ -94,7 +87,6 @@ const ClassesList = ({
   }
 
   useEffect(()=>{
-    setIsLoading(true)
     const doFetch = async () => {
       if (selectedOption === 'paraescolar') {
         await doFetchParaescolaresList({'nombre': clase, turno: claseTurno})
@@ -103,7 +95,6 @@ const ClassesList = ({
         await doFetchGroupList({'grupo':clase})
         setTableData(selectGroupList)
       }
-      setIsLoading(false)
     }
     doFetch()
   }, [
