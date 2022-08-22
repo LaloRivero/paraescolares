@@ -85,10 +85,10 @@ export const AppProvider = ({ children }) => {
   const doParaescolaresFetch = async () => {
     const request = await fetch(`${API}/paraescolares/getall/`)
     const response = await request.json()
-    if (response.error) {
-      throw Error(response)
-    } else {
+    if (request.status === 200) {
       setSelectParaescolares(response)
+    }else {
+      throw Error(response)
     }
   }
 
