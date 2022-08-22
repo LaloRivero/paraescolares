@@ -259,7 +259,7 @@ const Wrapped = () => {
   useEffect(() => {
     const doFetch = async () => await doGroupsFetch()
     doFetch()
-  }, []);
+  });
 
   return (
     <ClassesList
