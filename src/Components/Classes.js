@@ -335,7 +335,7 @@ const Wrapped = () => {
       setIsLoading(false)
     }
     doFetch()
-  },[doParaescolaresFetch])
+  })
 
   return(
     <>
