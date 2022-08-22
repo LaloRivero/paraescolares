@@ -221,7 +221,6 @@ export const AppProvider = ({ children }) => {
   }
 
   const doLoginUser = async values => {
-    console.log(API)
     const request = await fetch(`${API}/token/`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
