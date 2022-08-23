@@ -259,7 +259,8 @@ const Wrapped = () => {
   useEffect(() => {
     const doFetch = async () => await doGroupsFetch()
     doFetch()
-  });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ClassesList

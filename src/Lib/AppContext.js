@@ -299,9 +299,13 @@ export const AppProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    doWakeUpServer()
-    doParaescolaresFetch()
-  },[])
+    const doFetch = async () => {
+      await doWakeUpServer()
+      await doParaescolaresFetch()
+    }
+    doFetch()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const contextData = {
     isLoading: isLoading,

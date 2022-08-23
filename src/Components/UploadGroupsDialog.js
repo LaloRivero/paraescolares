@@ -27,7 +27,6 @@ const UploadGroupDialog = ({isOpen, onClose, doCreateNewGroup, isLoading}) => {
     if (await doCreateNewGroup(file)) {
       onClose()
     }
-
   }
 
   return (
