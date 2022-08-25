@@ -77,7 +77,6 @@ const ClassesList = ({
   doFetchGroupList,
   doFetchParaescolaresList,
   handleSearch,
-  tableData,
   handleSelectClass,
   handleSelectClassTurno,
   handleChangeOption,
@@ -251,7 +250,6 @@ const Wrapped = () => {
   const [clase, setClase] = useState('')
   const [claseTurno, setClaseTurno] = useState('')
   const [selectedOption, setSelectedOption] = useState('paraescolar')
-  const [tableData, setTableData] = useState([])
   const handleSelectClass = event => setClase(event.target.value)
   const handleSelectClassTurno = event => setClaseTurno(event.target.value)
   const handleChangeOption = event => {
@@ -299,7 +297,6 @@ const Wrapped = () => {
       paraescolaresNames={paraescolaresNames}
       groups={selectGroups}
       handleSearch={handleSearch}
-      tableData={tableData}
       handleSelectClass={handleSelectClass}
       handleSelectClassTurno={handleSelectClassTurno}
       handleChangeOption={handleChangeOption}
