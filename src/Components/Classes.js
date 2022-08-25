@@ -271,6 +271,12 @@ const Classes = ({
                       >
                         Vespertino
                       </MenuItem>
+                      <MenuItem
+                        className={classes.selectItem}
+                        value={'AMBOS'}
+                      >
+                        Ambos turnos
+                      </MenuItem>
                     </Field>
                     <Field
                       id="cupo_total"
