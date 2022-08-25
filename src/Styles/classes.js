@@ -14,6 +14,16 @@ const classes = {
     color: 'white',
     background: '#282425',
   },
+  searchButtonContainer:{
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  searchButton: {
+    alignSelf: 'flex-end',
+    marginLeft:'15px',
+    color: 'white',
+    background: '#282425',
+  },
   createClassContainer: {
     display: 'flex',
     justifyContent: 'flex-end',
