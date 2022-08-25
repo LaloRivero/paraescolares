@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import { makeStyles } from "@material-ui/core/styles"
 import DataTable from "react-data-table-component"
 import AppContext from '../Lib/AppContext'
 
 
 import {
+  Button,
   Card,
   CardContent,
+  CircularProgress,
   InputLabel,
   FormControl,
   FormLabel,
@@ -74,39 +76,17 @@ const ClassesList = ({
   selectGroupList,
   doFetchGroupList,
   doFetchParaescolaresList,
+  handleSearch,
+  tableData,
+  handleSelectClass,
+  handleSelectClassTurno,
+  handleChangeOption,
+  selectedOption,
+  clase,
+  claseTurno,
+  isLoading
 }) =>{
   const classes = useStyles()
-  const [clase, setClase] = useState('')
-  const [claseTurno, setClaseTurno] = useState('')
-  const [selectedOption, setSelectedOption] = useState('paraescolar')
-  const [tableData, setTableData] = useState([])
-  const handleSelectClass = event => setClase(event.target.value)
-  const handleSelectClassTurno = event => setClaseTurno(event.target.value)
-  const handleChangeOption = event => {
-    setSelectedOption(event.target.value)
-  }
-
-  useEffect(()=>{
-    const doFetch = async () => {
-      if (selectedOption === 'paraescolar') {
-        await doFetchParaescolaresList({'nombre': clase, turno: claseTurno})
-        setTableData(selectParaescolaresList)
-      } else {
-        await doFetchGroupList({'grupo':clase})
-        setTableData(selectGroupList)
-      }
-    }
-    doFetch()
-  }, [
-    clase,
-    claseTurno,
-    selectedOption,
-    selectParaescolaresList,
-    selectGroupList,
-    doFetchParaescolaresList,
-    doFetchGroupList
-  ])
-
   return (
     <div className={classes.listBackground}>
       <Card className={classes.listCard}>
@@ -224,6 +204,14 @@ const ClassesList = ({
             ) : null}
             </div>
           </div>
+          <div className={classes.searchButtonContainer}>
+            <Button
+              onClick={() => handleSearch()}
+              className={classes.searchButton}
+            >
+              Buscar
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
@@ -231,9 +219,15 @@ const ClassesList = ({
           <CardContent>
           <DataTable
             columns={selectedOption === 'paraescolar' ? paraescolarTableStructure : groupTableStructure}
-            data={tableData}
+            data={selectedOption === 'paraescolar' ? selectParaescolaresList : selectGroupList}
             highlightOnHover={true}
-            noDataComponent={"No hay información para mostrar"}
+            noDataComponent={isLoading ?
+              <div className={classes.selectDialogLoader}>
+                <CircularProgress
+                  size={100}
+                  color="inherit"
+                />
+              </div> : "No hay información para mostrar"}
             pagination
           />
           </CardContent>
@@ -252,13 +246,47 @@ const Wrapped = () => {
     doGroupsFetch,
     doFetchGroupList,
     doFetchParaescolaresList,
+    isLoading
   } = useContext(AppContext)
+  const [clase, setClase] = useState('')
+  const [claseTurno, setClaseTurno] = useState('')
+  const [selectedOption, setSelectedOption] = useState('paraescolar')
+  const [tableData, setTableData] = useState([])
+  const handleSelectClass = event => setClase(event.target.value)
+  const handleSelectClassTurno = event => setClaseTurno(event.target.value)
+  const handleChangeOption = event => {
+    setSelectedOption(event.target.value)
+  }
+
   const paraescolaresNames = selectParaescolares.map(
     paraescolar => ({nombre: paraescolar.nombre, turno: paraescolar.turno})
   )
+
+  //const handleSearch = () =>{}
+
+  const handleSearch = useCallback(() => {
+    if (selectedOption === 'paraescolar') {
+      doFetchParaescolaresList({'nombre': clase, turno: claseTurno})
+    }
+    if (selectedOption === 'grupo') {
+      doFetchGroupList({'grupo':clase})
+    }
+  }, [
+    clase,
+    claseTurno,
+    selectedOption,
+    doFetchGroupList,
+    doFetchParaescolaresList
+  ])
+
+  useEffect(() =>{
+    setClase('')
+    setClaseTurno('')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedOption])
+
   useEffect(() => {
-    const doFetch = async () => await doGroupsFetch()
-    doFetch()
+    doGroupsFetch()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -270,6 +298,15 @@ const Wrapped = () => {
       selectParaescolaresList={selectParaescolaresList}
       paraescolaresNames={paraescolaresNames}
       groups={selectGroups}
+      handleSearch={handleSearch}
+      tableData={tableData}
+      handleSelectClass={handleSelectClass}
+      handleSelectClassTurno={handleSelectClassTurno}
+      handleChangeOption={handleChangeOption}
+      selectedOption={selectedOption}
+      clase={clase}
+      claseTurno={claseTurno}
+      isLoading={isLoading}
     />
   )
 }
