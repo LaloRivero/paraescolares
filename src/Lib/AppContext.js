@@ -52,7 +52,7 @@ export const AppProvider = ({ children }) => {
       setRequestError(response.error)
     } else {
       setIsValidate(true)
-      setStudentId(response.matricula)
+      setStudentId(response.id)
       setSelectedStudent(response)
     }
     setIsLoading(false)
@@ -112,9 +112,10 @@ export const AppProvider = ({ children }) => {
       body: JSON.stringify({...selectStudentFormValues, eleccion: data}),
     })
     const response = await request.json()
-    if (response?.error) {
+    if (request?.error) {
       return response
     } else {
+      setStudentId(response.id)
       setSelectClassSucced(true)
     }
   }

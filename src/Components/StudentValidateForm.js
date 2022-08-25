@@ -15,7 +15,7 @@ const validationSchema = yup.object({
   nombres: yup.string().required('Nombres es un campo requerido'),
   apellido_paterno: yup.string().required('Apellido paterno es un campo requerido'),
   apellido_materno: yup.string(),
-  matricula: yup.string().required('Matricula es un campo requerido'),
+  matricula: yup.string(),
 })
 
 const StudentValidateForm = () => {
