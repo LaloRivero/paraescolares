@@ -180,6 +180,7 @@ export const AppProvider = ({ children }) => {
   }
 
   const doFetchParaescolaresList = async data => {
+    setIsLoading(true)
     const request = await fetch(`${API}/list/paraescolar/`, {
       headers: {
         'Content-Type': 'application/json',
@@ -191,7 +192,9 @@ export const AppProvider = ({ children }) => {
     const response = await request.json()
     if (request.status === 200){
       setParaescolaresList(response)
+      setIsLoading(false)
     } else {
+      setIsLoading(false)
       throw Error(response)
     }
   }
