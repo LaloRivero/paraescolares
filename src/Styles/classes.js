@@ -70,7 +70,7 @@ const classes = {
   },
   listCard: {
     minWidth: '80%',
-    margin: '20px'
+    margin: '10px'
   },
   listCardContainer:{
     display: 'flex',
