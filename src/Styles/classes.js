@@ -70,7 +70,10 @@ const classes = {
   },
   listCard: {
     minWidth: '80%',
-    margin: '10px'
+    margin: '5px'
+  },
+  listClassDataTable:{
+    height: '100%',
   },
   listCardContainer:{
     display: 'flex',

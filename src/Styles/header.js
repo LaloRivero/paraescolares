@@ -3,7 +3,6 @@ const header = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '8px',
     background: '#dddddd',
     boxShadow: 2,
   },

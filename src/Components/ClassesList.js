@@ -217,6 +217,7 @@ const ClassesList = ({
       <Card className={classes.listCard}>
           <CardContent>
           <DataTable
+            className={classes.listClassDataTable}
             columns={selectedOption === 'paraescolar' ? paraescolarTableStructure : groupTableStructure}
             data={selectedOption === 'paraescolar' ? selectParaescolaresList : selectGroupList}
             highlightOnHover={true}
